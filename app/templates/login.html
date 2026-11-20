@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block title %}Sign in · SentinelAuth{% endblock %}{% block content %}
+<div class="auth-wrap">
+    <section class="auth-aside">
+        <div class="eyebrow">SECURITY OPERATIONS</div>
+        <h1>Protect every<br><span>login attempt.</span></h1>
+        <p>Monitor authentication activity, detect suspicious patterns, and investigate security alerts from one place.</p>
+        <div class="mini-stats"><div><b>24/7</b><small>Monitoring-ready</small></div>
+        <div><b>3</b><small>Detection rules</small></div></div></section>
+<section class="panel auth-panel">
+    <div class="eyebrow">WELCOME BACK</div><h2>Sign in</h2>
+    <p class="muted">Access your SentinelAuth workspace.</p>
+   <form method="post">
+    <input
+        type="hidden"
+        name="csrf_token"
+        value="{{ csrf_token() }}"
+    ><label>Username</label>
+        <input name="username" required autocomplete="username" placeholder="Enter username">
+        <label>Password</label>
+        <input name="password" type="password" required autocomplete="current-password" placeholder="Enter password"><button class="primary full">Sign in <span>→</span>
+        </button></form><p class="muted center">New here? <a href="{{ url_for('register') }}">Create an account</a></p>
+        <div class="hint">Demo admin credentials are configured in your <code>.env</code> file.</div></section></div>{% endblock %}

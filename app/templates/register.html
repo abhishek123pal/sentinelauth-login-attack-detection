@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Create account · SentinelAuth{% endblock %}{% block content %}
+<div class="auth-wrap single"><section class="panel auth-panel"><div class="eyebrow">GET STARTED</div><h2>Create account</h2><p class="muted">Register a standard user account.</p><form method="post"><input
+    type="hidden"
+    name="csrf_token"
+    value="{{ csrf_token() }}"
+><label>Username</label><input name="username" required minlength="3" maxlength="80" placeholder="Choose a username"><label>Password</label><input name="password" type="password" required minlength="12" placeholder="At least 12 characters"><button class="primary full">Create account →</button></form><p class="muted center">Already registered? <a href="{{ url_for('login') }}">Sign in</a></p></section></div>{% endblock %}

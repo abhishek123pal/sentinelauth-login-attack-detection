@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Security alerts · SentinelAuth{% endblock %}{% block content %}
+<div class="page-heading"><div><div class="eyebrow">THREAT INVESTIGATION</div><h1>Security alerts</h1><p class="muted">Review and resolve suspicious authentication patterns.</p></div></div><section class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>Detected</th><th>Alert type</th><th>Source IP</th><th>Severity</th><th>Description</th><th>Status</th><th>Action</th></tr></thead><tbody>{% for a in alerts %}<tr><td>{{ a.created_at.strftime('%Y-%m-%d %H:%M') }}</td><td>{{ a.alert_type }}</td><td>{{ a.source_ip }}</td><td><span class="severity {{ a.severity|lower }}">{{ a.severity }}</span></td><td>{{ a.description }}</td><td>{{ a.status }}</td><td>{% if a.status == 'OPEN' %}<form method="post" action="{{ url_for('resolve_alert', alert_id=a.id) }}"><input
+    type="hidden"
+    name="csrf_token"
+    value="{{ csrf_token() }}"
+><button class="small-button">Resolve</button></form>{% else %}—{% endif %}</td></tr>{% else %}<tr><td colspan="7" class="empty">No security alerts yet.</td></tr>{% endfor %}</tbody></table></div></section>{% endblock %}

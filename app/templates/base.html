@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}SentinelAuth{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
+<body><div class="shell">
+<header class="topbar"><a class="brand" href="{{ url_for('index') }}"><span class="brand-icon">S</span> Sentinel<span>Auth</span></a>
+<nav>{% if current_user %}<a href="{{ url_for('dashboard') }}">Dashboard</a>{% if current_role == 'admin' %}<a href="{{ url_for('admin_dashboard') }}">Security Center</a><a href="{{ url_for('events') }}">Events</a><a href="{{ url_for('alerts') }}">Alerts</a>{% endif %}<span class="user-chip">{{ current_user }}</span><form method="post" action="{{ url_for('logout') }}">  <input
+        type="hidden"
+        name="csrf_token"
+        value="{{ csrf_token() }}"
+    ><button class="link-button">Logout</button></form>{% else %}<a href="{{ url_for('login') }}">Login</a><a href="{{ url_for('register') }}">Register</a>{% endif %}</nav></header>
+<main class="container">{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}{% block content %}{% endblock %}</main>
+<footer>SentinelAuth · Defensive authentication monitoring · Demo project</footer></div></body></html>
